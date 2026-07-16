@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Zamanlama Algoritması Simülatörü | Scheduling Algorithm Simulator",
+  title: "Chronos - Scheduling Algorithm Simulator",
   description:
     "İşletim sistemleri CPU zamanlama (scheduling) algoritmalarını interaktif olarak görselleştiren eğitim aracı: FCFS, SJF, SRTF, Round Robin ve Priority.",
 };

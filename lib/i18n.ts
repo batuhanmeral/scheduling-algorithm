@@ -6,7 +6,7 @@ export type Lang = "tr" | "en";
  */
 export const translations = {
   tr: {
-    appTitle: "Zamanlama Algoritması Simülatörü",
+    appTitle: "Chronos - Zamanlama Algoritması Simülatörü",
     appSubtitle:
       "İşletim sistemlerindeki CPU zamanlama algoritmalarını görselleştirerek öğrenin.",
     controlPanel: "Kontrol Paneli",
@@ -65,7 +65,7 @@ export const translations = {
     exportPng: "PNG",
   },
   en: {
-    appTitle: "Scheduling Algorithm Simulator",
+    appTitle: "Chronos - Scheduling Algorithm Simulator",
     appSubtitle:
       "Learn operating system CPU scheduling algorithms through visualization.",
     controlPanel: "Control Panel",
