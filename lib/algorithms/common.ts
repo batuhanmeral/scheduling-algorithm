@@ -81,11 +81,12 @@ export function buildResult(
  * Non-preemptive algoritmaların ortak döngüsü: her karar noktasında
  * gelmiş işlemler arasından karşılaştırıcıya göre en öndekini seçer ve
  * bitene kadar çalıştırır. Hiç işlem gelmemişse bir sonraki varışa kadar
- * boşta (idle) dilimi ekler.
+ * boşta (idle) dilimi ekler. Karşılaştırıcıya karar anı (clock) da
+ * verilir; HRRN gibi zamana bağlı ölçütler bunu kullanır.
  */
 export function runNonPreemptive(
   processes: Process[],
-  compare: (a: Process, b: Process) => number,
+  compare: (a: Process, b: Process, clock: number) => number,
 ): GanttSegment[] {
   const remaining = [...processes];
   const gantt: GanttSegment[] = [];
@@ -100,7 +101,7 @@ export function runNonPreemptive(
       continue;
     }
 
-    const chosen = [...arrived].sort(compare)[0];
+    const chosen = [...arrived].sort((a, b) => compare(a, b, clock))[0];
     gantt.push({
       processId: chosen.id,
       start: clock,
