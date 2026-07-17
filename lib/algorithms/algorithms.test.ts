@@ -203,6 +203,159 @@ describe("Priority (Non-Preemptive)", () => {
   });
 });
 
+describe("Priority (Preemptive)", () => {
+  it("daha yüksek öncelikli varış çalışanı keser (preemption)", () => {
+    const result = runScheduler("PRIORITY_P", [
+      p(1, 0, 10, 3),
+      p(2, 1, 2, 1),
+    ]);
+
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 1 },
+      { processId: 2, start: 1, end: 3 },
+      { processId: 1, start: 3, end: 12 },
+    ]);
+    expect(result.processes.map((r) => r.waitingTime)).toEqual([2, 0]);
+  });
+
+  it("aynı öncelikli yeni varış çalışanı kesmez", () => {
+    const result = runScheduler("PRIORITY_P", [p(1, 0, 5, 2), p(2, 1, 3, 2)]);
+
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 5 },
+      { processId: 2, start: 5, end: 8 },
+    ]);
+  });
+});
+
+describe("Priority + Aging", () => {
+  it("bekleyen düşük öncelikli işlem yaşlanarak CPU'yu devralır", () => {
+    // P2(pri 4), her 5 birimde 1 yükselir: t=15'te etkin öncelik 1 olur
+    // ve P1'i (pri 2) keser. Aging olmasaydı t=20'ye kadar beklerdi.
+    const result = runScheduler("PRIORITY_AGING", [
+      p(1, 0, 20, 2),
+      p(2, 0, 4, 4),
+    ]);
+
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 15 },
+      { processId: 2, start: 15, end: 19 },
+      { processId: 1, start: 19, end: 24 },
+    ]);
+    expect(result.processes.map((r) => r.waitingTime)).toEqual([4, 15]);
+  });
+
+  it("yaşlanma gerektirmeyen senaryoda preemptive priority gibi davranır", () => {
+    const input = [p(1, 0, 10, 3), p(2, 1, 2, 1)];
+    const aging = runScheduler("PRIORITY_AGING", input);
+    const preemptive = runScheduler("PRIORITY_P", input);
+
+    expect(aging.gantt).toEqual(preemptive.gantt.map((s) => ({ ...s })));
+  });
+});
+
+describe("Priority Round Robin", () => {
+  it("aynı öncelik seviyesinde düz Round Robin uygular", () => {
+    const result = runScheduler(
+      "PRIORITY_RR",
+      [p(1, 0, 4, 1), p(2, 0, 3, 1)],
+      { timeQuantum: 2 },
+    );
+
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 2 },
+      { processId: 2, start: 2, end: 4 },
+      { processId: 1, start: 4, end: 6 },
+      { processId: 2, start: 6, end: 7 },
+    ]);
+  });
+
+  it("yüksek öncelikli varış çalışanı keser; kesilen kuyruk başına döner", () => {
+    const result = runScheduler(
+      "PRIORITY_RR",
+      [p(1, 0, 5, 2), p(2, 0, 4, 2), p(3, 3, 2, 1)],
+      { timeQuantum: 2 },
+    );
+
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 2 },
+      { processId: 2, start: 2, end: 3 }, // P3 (pri 1) t=3'te kesti
+      { processId: 3, start: 3, end: 5 },
+      { processId: 2, start: 5, end: 7 }, // kesilen P2 kuyruk başından devam
+      { processId: 1, start: 7, end: 9 },
+      { processId: 2, start: 9, end: 10 },
+      { processId: 1, start: 10, end: 11 },
+    ]);
+    expect(result.processes.map((r) => r.completionTime)).toEqual([11, 10, 5]);
+  });
+});
+
+describe("HRRN", () => {
+  it("yanıt oranı (bekleme + burst) / burst en yüksek olanı seçer", () => {
+    // t=13'te P4 oranı 12/5=2.4, P5 oranı 7/2=3.5 → P5 önce çalışır.
+    const result = runScheduler("HRRN", [
+      p(1, 0, 3),
+      p(2, 2, 6),
+      p(3, 4, 4),
+      p(4, 6, 5),
+      p(5, 8, 2),
+    ]);
+
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 3 },
+      { processId: 2, start: 3, end: 9 },
+      { processId: 3, start: 9, end: 13 },
+      { processId: 5, start: 13, end: 15 },
+      { processId: 4, start: 15, end: 20 },
+    ]);
+    expect(result.avgWaitingTime).toBeCloseTo(4);
+    expect(result.avgTurnaroundTime).toBeCloseTo(8);
+  });
+
+  it("bekleme arttıkça uzun işlerin oranı büyür (açlığı önler)", () => {
+    // t=0'da tüm oranlar 1 → FCFS gibi id sırası; sonrasında en çok
+    // bekleyenin oranı öne geçer.
+    const result = runScheduler("HRRN", [p(1, 0, 8), p(2, 0, 4), p(3, 0, 2)]);
+
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 8 },
+      { processId: 3, start: 8, end: 10 },
+      { processId: 2, start: 10, end: 14 },
+    ]);
+  });
+});
+
+describe("MLFQ", () => {
+  it("quantum'unu bitiren işlem alt kuyruğa iner (demotion)", () => {
+    // Q0 q=2, Q1 q=4, Q2 FCFS.
+    const result = runScheduler("MLFQ", [p(1, 0, 10), p(2, 1, 3)], {
+      timeQuantum: 2,
+    });
+
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 2 }, // Q0 → Q1
+      { processId: 2, start: 2, end: 4 }, // Q0 → Q1
+      { processId: 1, start: 4, end: 8 }, // Q1 (q=4) → Q2
+      { processId: 2, start: 8, end: 9 }, // Q1'de bitti
+      { processId: 1, start: 9, end: 13 }, // Q2 (FCFS)
+    ]);
+    expect(result.processes.map((r) => r.completionTime)).toEqual([13, 9]);
+  });
+
+  it("yeni varış alt seviyede çalışanı keser; kesilen seviyesini korur", () => {
+    const result = runScheduler("MLFQ", [p(1, 0, 6), p(2, 5, 2)], {
+      timeQuantum: 2,
+    });
+
+    // P1 Q1'de 2-6 dilimindeyken P2'nin t=5 varışı onu keser.
+    expect(result.gantt).toEqual([
+      { processId: 1, start: 0, end: 5 },
+      { processId: 2, start: 5, end: 7 },
+      { processId: 1, start: 7, end: 8 },
+    ]);
+  });
+});
+
 describe("mergeSegments", () => {
   it("aynı işleme ait bitişik dilimleri birleştirir, sıfır uzunluklu dilimleri atar", () => {
     expect(
