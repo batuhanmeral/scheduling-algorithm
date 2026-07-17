@@ -1,6 +1,10 @@
 "use client";
 
-import { ALGORITHMS, type AlgorithmId } from "@/lib/types";
+import {
+  ALGORITHMS,
+  QUANTUM_ALGORITHMS,
+  type AlgorithmId,
+} from "@/lib/types";
 import { useLanguage } from "./LanguageProvider";
 
 interface ControlPanelProps {
@@ -51,7 +55,7 @@ export default function ControlPanel({
           </select>
         </label>
 
-        {algorithm === "RR" && (
+        {QUANTUM_ALGORITHMS.has(algorithm) && (
           <label className="flex animate-fade-in-up flex-col gap-1.5">
             <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
               {t("timeQuantum")}

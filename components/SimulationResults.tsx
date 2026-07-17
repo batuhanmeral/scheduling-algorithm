@@ -1,7 +1,11 @@
 "use client";
 
 import { timelineBounds } from "@/lib/timeline";
-import { ALGORITHMS, type SimulationResult } from "@/lib/types";
+import {
+  ALGORITHMS,
+  PRIORITY_ALGORITHMS,
+  type SimulationResult,
+} from "@/lib/types";
 import AverageCards from "./AverageCards";
 import ExportButtons from "./ExportButtons";
 import GanttChart from "./GanttChart";
@@ -48,7 +52,7 @@ export default function SimulationResults({ result }: SimulationResultsProps) {
         <GanttChart segments={result.gantt} />
         <ResultsTable
           results={result.processes}
-          showPriority={result.algorithm === "PRIORITY"}
+          showPriority={PRIORITY_ALGORITHMS.has(result.algorithm)}
         />
         <AverageCards
           avgTurnaroundTime={result.avgTurnaroundTime}

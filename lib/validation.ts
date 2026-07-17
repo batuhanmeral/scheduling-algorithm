@@ -1,5 +1,10 @@
 import type { TranslationKey } from "./i18n";
-import type { AlgorithmId, Process } from "./types";
+import {
+  PRIORITY_ALGORITHMS,
+  QUANTUM_ALGORITHMS,
+  type AlgorithmId,
+  type Process,
+} from "./types";
 
 export interface ValidationError {
   /** Kullanıcıya gösterilecek mesajın çeviri anahtarı. */
@@ -29,14 +34,17 @@ export function validateInput(
       return { key: "errorInvalidBurst", processId: p.id };
     }
     if (
-      algorithm === "PRIORITY" &&
+      PRIORITY_ALGORITHMS.has(algorithm) &&
       (!Number.isFinite(p.priority) || p.priority < 1)
     ) {
       return { key: "errorInvalidPriority", processId: p.id };
     }
   }
 
-  if (algorithm === "RR" && (!Number.isFinite(timeQuantum) || timeQuantum < 1)) {
+  if (
+    QUANTUM_ALGORITHMS.has(algorithm) &&
+    (!Number.isFinite(timeQuantum) || timeQuantum < 1)
+  ) {
     return { key: "errorInvalidQuantum" };
   }
 

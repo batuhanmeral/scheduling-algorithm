@@ -15,6 +15,7 @@ import { generateRandomProcesses } from "@/lib/random";
 import { parseShareParams } from "@/lib/share";
 import {
   ALGORITHMS,
+  PRIORITY_ALGORITHMS,
   type AlgorithmId,
   type Process,
   type SimulationResult,
@@ -177,7 +178,7 @@ export default function Home() {
         </div>
         <ProcessTable
           processes={processes}
-          showPriority={algorithm === "PRIORITY"}
+          showPriority={PRIORITY_ALGORITHMS.has(algorithm)}
           onUpdate={handleUpdateProcess}
           onAdd={handleAddProcess}
           onDelete={handleDeleteProcess}

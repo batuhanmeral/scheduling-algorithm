@@ -56,6 +56,16 @@ export const translations = {
       "Her işlem sırayla en fazla bir 'time quantum' kadar çalışır; bitmezse kuyruğun sonuna döner. Adildir ve etkileşimli sistemlere uygundur; quantum seçimi kritiktir.",
     descPRIORITY:
       "Her karar anında en yüksek öncelikli (en küçük öncelik değeri) işlem çalışır (kesintisiz). Düşük öncelikli işlemler açlığa uğrayabilir; yaşlandırma (aging) ile önlenebilir.",
+    descPRIORITY_P:
+      "Priority'nin kesintili (preemptive) hâli. Daha yüksek öncelikli bir işlem geldiğinde çalışanı keser ve CPU'yu devralır. Yanıt süresi iyileşir; düşük öncelikliler yine açlığa uğrayabilir.",
+    descPRIORITY_AGING:
+      "Preemptive Priority + yaşlandırma: hazır kuyruğunda bekleyen işlemin etkin önceliği her 5 birimde 1 yükselir. Böylece düşük öncelikli işlemler de eninde sonunda CPU alır; açlık önlenir.",
+    descPRIORITY_RR:
+      "Her öncelik seviyesinin kendi kuyruğu vardır; en yüksek öncelikli kuyruk içinde Round Robin uygulanır. Daha yüksek öncelikli varış çalışanı keser. Öncelik + adil paylaşımı birleştirir.",
+    descHRRN:
+      "Her karar anında yanıt oranı (bekleme + burst) / burst en yüksek olan işlem çalışır (kesintisiz). Bekleyen uzun işlerin oranı zamanla büyüdüğü için SJF'deki açlık sorununu çözer.",
+    descMLFQ:
+      "Üç seviyeli geri beslemeli kuyruk: Q0 (RR, quantum), Q1 (RR, 2×quantum), Q2 (FCFS). Quantum'unu bitiren işlem alta iner; yeni varışlar Q0'a girer ve alttaki çalışanı keser. Kısa işler hızlı, uzun işler altta tamamlanır.",
     share: "Paylaş",
     copied: "Kopyalandı!",
     shareAria: "Simülasyonu bağlantıyla paylaş",
@@ -115,6 +125,16 @@ export const translations = {
       "Each process runs for at most one time quantum in turn, then goes to the back of the queue if unfinished. Fair and suited to interactive systems; the quantum size is critical.",
     descPRIORITY:
       "At each decision point the highest-priority job (smallest priority value) runs, without preemption. Low-priority jobs may starve; aging can prevent this.",
+    descPRIORITY_P:
+      "The preemptive version of Priority. A newly arrived higher-priority job interrupts the running one and takes over the CPU. Improves response time; low-priority jobs may still starve.",
+    descPRIORITY_AGING:
+      "Preemptive Priority with aging: a job waiting in the ready queue gains one effective priority level every 5 time units. Low-priority jobs eventually get the CPU, preventing starvation.",
+    descPRIORITY_RR:
+      "Each priority level has its own queue; the highest-priority queue is served with Round Robin. A higher-priority arrival preempts the running job. Combines priorities with fair sharing.",
+    descHRRN:
+      "At each decision point the job with the highest response ratio (waiting + burst) / burst runs, without preemption. Waiting jobs' ratios grow over time, solving SJF's starvation problem.",
+    descMLFQ:
+      "Three-level feedback queue: Q0 (RR, quantum), Q1 (RR, 2×quantum), Q2 (FCFS). A job that uses its full quantum is demoted; new arrivals enter Q0 and preempt lower-level work. Short jobs finish fast, long jobs settle at the bottom.",
     share: "Share",
     copied: "Copied!",
     shareAria: "Share simulation via link",

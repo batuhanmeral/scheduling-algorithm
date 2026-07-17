@@ -1,4 +1,9 @@
-import { ALGORITHMS, type AlgorithmId, type Process } from "./types";
+import {
+  ALGORITHMS,
+  QUANTUM_ALGORITHMS,
+  type AlgorithmId,
+  type Process,
+} from "./types";
 
 /** URL üzerinden paylaşılan simülasyon girdileri. */
 export interface SharedState {
@@ -16,7 +21,7 @@ const DEFAULT_TIME_QUANTUM = 2;
 export function encodeShareParams(state: SharedState): string {
   const params = new URLSearchParams();
   params.set("algo", state.algorithm);
-  if (state.algorithm === "RR") {
+  if (QUANTUM_ALGORITHMS.has(state.algorithm)) {
     params.set("tq", String(state.timeQuantum));
   }
   params.set(

@@ -1,5 +1,5 @@
 import { processHex } from "./colors";
-import type { SimulationResult } from "./types";
+import { PRIORITY_ALGORITHMS, type SimulationResult } from "./types";
 
 /**
  * Bu modüldeki fonksiyonlar yalnızca tarayıcıda, kullanıcı etkileşimiyle
@@ -17,7 +17,7 @@ function triggerDownload(url: string, filename: string) {
 
 /** Sonuç tablosunu CSV metnine çevirir (başlıklar standart kısaltmalarla). */
 export function resultToCsv(result: SimulationResult): string {
-  const showPriority = result.algorithm === "PRIORITY";
+  const showPriority = PRIORITY_ALGORITHMS.has(result.algorithm);
   const header = [
     "PID",
     "AT",
