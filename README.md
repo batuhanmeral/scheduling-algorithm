@@ -1,6 +1,11 @@
-# Chronos — Scheduling Algorithm Simulator
+# Chronos
+
+> Interactive CPU scheduling algorithm simulator with Gantt charts and side-by-side comparison.
 
 Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing operating-system CPU scheduling algorithms. Enter processes, run a scheduler, and watch the Gantt chart, per-process metrics, and averages update instantly — or compare all ten algorithms side by side to see which one performs best.
+
+**[View the live application here.](https://chronos-batuhanmeral.vercel.app)**
+
 
 ## Features
 
