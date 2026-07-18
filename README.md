@@ -2,8 +2,6 @@
 
 Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing operating-system CPU scheduling algorithms. Enter processes, run a scheduler, and watch the Gantt chart, per-process metrics, and averages update instantly — or compare all ten algorithms side by side to see which one performs best.
 
-![Chronos — process input and control panel](docs/screenshot-input.png)
-
 ## Features
 
 - **Ten scheduling algorithms** — FCFS, SJF, SRTF, Round Robin, Priority (non-preemptive and preemptive), Priority + Aging, Priority Round Robin, HRRN, and MLFQ.
@@ -16,18 +14,6 @@ Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing op
 - **Shareable links** — The current algorithm and process set are encoded into the URL; opening a shared link restores the inputs and runs the simulation automatically.
 - **Theme & language** — Light/dark mode and Turkish/English toggles, both persisted in `localStorage`.
 - **Algorithm explanations** — A "How It Works" card summarizes the selected algorithm in plain language.
-
-## Simulation Results
-
-Each run renders a color-coded Gantt chart (idle periods included), a per-process results table with CT/TAT/WT columns and totals, and four aggregate metric cards. Results can be exported as CSV or PNG with one click.
-
-![Chronos — Gantt chart, results table, and metrics](docs/screenshot-results.png)
-
-## Algorithm Comparison
-
-**Compare All** runs every algorithm on the same process set, ranks them with proportional waiting-time bars, and marks the best performer by average waiting time.
-
-![Chronos — algorithm comparison](docs/screenshot-comparison.png)
 
 ## Algorithms
 
@@ -53,7 +39,7 @@ Each process is defined by an **arrival time (AT)**, a **burst time (BT)**, and 
 - TypeScript
 - [Vitest](https://vitest.dev) for unit tests
 
-## Getting Started
+## Installation
 
 Requires [Node.js](https://nodejs.org) 20 or newer.
 
@@ -64,37 +50,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Usage
-
-1. Pick an algorithm from the control panel (set a time quantum for Round Robin, Priority Round Robin, or MLFQ).
-2. Edit the process table by hand, or hit **Generate Random Processes** to get a starter set.
-3. Run **Calculate & Simulate** to render the Gantt chart, per-process results, and aggregate metrics.
-4. Use **Compare All** to run every algorithm on the same input and see the best performer by average waiting time.
-5. Export the results as CSV or the Gantt chart as PNG, or copy a shareable link that encodes the entire setup.
-
-### Shareable links
-
-The active setup is encoded into the query string as `?algo=RR&tq=3&p=AT-BT-PR,AT-BT-PR,...` — one comma-separated entry per process. Opening such a link restores the algorithm, time quantum, and process list, then runs the simulation automatically. Invalid or incomplete parameters are ignored and fall back to the defaults.
-
-## Scripts
-
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the development server |
-| `npm run build` | Create a production build |
-| `npm run start` | Serve the production build |
-| `npm test` | Run the test suite once |
-| `npm run test:watch` | Run tests in watch mode |
-
-## Testing
-
-Unit tests cover all ten scheduling algorithms (with hand-verified Gantt charts for preemption, aging, and demotion scenarios), timeline computation, and the export/share logic. Run them with:
-
-```bash
-npm test
-```
+Open [http://localhost:3000](http://localhost:3000) in your browser. Run the unit tests with `npm test`.
 
 ## Project Structure
 
@@ -105,6 +61,18 @@ lib/          Scheduling algorithms, timeline, export, share, and i18n logic
   algorithms/   One module per scheduler + shared helpers and tests
 docs/         Screenshots and other documentation assets
 ```
+
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="docs/image.png" alt="Chronos — full application view" width="900" />
+      <br />
+      <sub>Process input, simulation results & algorithm comparison</sub>
+    </td>
+  </tr>
+</table>
 
 ## License
 
