@@ -1,8 +1,8 @@
 # Chronos — Scheduling Algorithm Simulator
 
-Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing operating-system CPU scheduling algorithms. Enter processes, run a scheduler, and watch the Gantt chart, per-process metrics, and averages update instantly — or compare every algorithm side by side to see which one performs best.
+Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing operating-system CPU scheduling algorithms. Enter processes, run a scheduler, and watch the Gantt chart, per-process metrics, and averages update instantly — or compare all ten algorithms side by side to see which one performs best.
 
-![Chronos — Scheduling Algorithm Simulator](docs/image.png)
+![Chronos — process input and control panel](docs/screenshot-input.png)
 
 ## Features
 
@@ -15,6 +15,19 @@ Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing op
 - **Export** — Download results as CSV or the Gantt chart as PNG.
 - **Shareable links** — The current algorithm and process set are encoded into the URL; opening a shared link restores the inputs and runs the simulation automatically.
 - **Theme & language** — Light/dark mode and Turkish/English toggles, both persisted in `localStorage`.
+- **Algorithm explanations** — A "How It Works" card summarizes the selected algorithm in plain language.
+
+## Simulation Results
+
+Each run renders a color-coded Gantt chart (idle periods included), a per-process results table with CT/TAT/WT columns and totals, and four aggregate metric cards. Results can be exported as CSV or PNG with one click.
+
+![Chronos — Gantt chart, results table, and metrics](docs/screenshot-results.png)
+
+## Algorithm Comparison
+
+**Compare All** runs every algorithm on the same process set, ranks them with proportional waiting-time bars, and marks the best performer by average waiting time.
+
+![Chronos — algorithm comparison](docs/screenshot-comparison.png)
 
 ## Algorithms
 
@@ -55,10 +68,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Usage
 
-1. Pick an algorithm from the control panel (set a time quantum when Round Robin is selected).
+1. Pick an algorithm from the control panel (set a time quantum for Round Robin, Priority Round Robin, or MLFQ).
 2. Edit the process table by hand, or hit **Generate Random Processes** to get a starter set.
-3. Run the simulation to render the Gantt chart, per-process results, and aggregate metrics.
-4. Use **Compare** to run every algorithm on the same input and see the best performer by average waiting time.
+3. Run **Calculate & Simulate** to render the Gantt chart, per-process results, and aggregate metrics.
+4. Use **Compare All** to run every algorithm on the same input and see the best performer by average waiting time.
 5. Export the results as CSV or the Gantt chart as PNG, or copy a shareable link that encodes the entire setup.
 
 ### Shareable links
@@ -77,7 +90,7 @@ The active setup is encoded into the query string as `?algo=RR&tq=3&p=AT-BT-PR,A
 
 ## Testing
 
-Unit tests cover the scheduling algorithms, timeline computation, and the export/share logic. Run them with:
+Unit tests cover all ten scheduling algorithms (with hand-verified Gantt charts for preemption, aging, and demotion scenarios), timeline computation, and the export/share logic. Run them with:
 
 ```bash
 npm test
@@ -89,6 +102,7 @@ npm test
 app/          Next.js App Router entry (layout, page, global styles)
 components/   React UI components (control panel, tables, charts, toggles)
 lib/          Scheduling algorithms, timeline, export, share, and i18n logic
+  algorithms/   One module per scheduler + shared helpers and tests
 docs/         Screenshots and other documentation assets
 ```
 
