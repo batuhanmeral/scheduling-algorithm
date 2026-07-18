@@ -6,7 +6,7 @@ Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing op
 
 ## Features
 
-- **Five scheduling algorithms** — FCFS, SJF (non-preemptive), SRTF (preemptive), Round Robin (configurable time quantum), and Priority (non-preemptive).
+- **Ten scheduling algorithms** — FCFS, SJF, SRTF, Round Robin, Priority (non-preemptive and preemptive), Priority + Aging, Priority Round Robin, HRRN, and MLFQ.
 - **Editable process table** — Add, delete, and edit processes, generate a random set, or clear all at once.
 - **Gantt chart** — Color-coded, animated timeline of CPU execution with idle periods clearly marked.
 - **Results table** — Completion, turnaround, and waiting time per process, plus a totals row.
@@ -25,8 +25,13 @@ Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing op
 | **SRTF** — Shortest Remaining Time First | Yes | Preemptive variant of SJF; re-evaluates on every arrival. |
 | **RR** — Round Robin | Yes | Cycles through processes using a configurable time quantum. |
 | **Priority** | No | Runs the highest-priority available process (lower value = higher priority). |
+| **Priority (Preemptive)** | Yes | A higher-priority arrival takes over the CPU immediately. |
+| **Priority + Aging** | Yes | Waiting processes gain one effective priority level every 5 time units, preventing starvation. |
+| **Priority Round Robin** | Yes | One queue per priority level; the highest-priority queue is served with Round Robin. |
+| **HRRN** — Highest Response Ratio Next | No | Picks the highest `(waiting + burst) / burst` ratio; solves SJF's starvation problem. |
+| **MLFQ** — Multi-Level Feedback Queue | Yes | Three queues: RR with quantum, RR with 2×quantum, then FCFS; jobs that exhaust their quantum are demoted. |
 
-Each process is defined by an **arrival time (AT)**, a **burst time (BT)**, and a **priority** (used only by the Priority algorithm).
+Each process is defined by an **arrival time (AT)**, a **burst time (BT)**, and a **priority** (used by the Priority family of algorithms). The time quantum applies to Round Robin, Priority Round Robin, and MLFQ.
 
 ## Tech Stack
 
