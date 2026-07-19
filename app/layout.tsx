@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Backdrop from "@/components/Backdrop";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import "./globals.css";
 
@@ -45,6 +46,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <Backdrop />
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>

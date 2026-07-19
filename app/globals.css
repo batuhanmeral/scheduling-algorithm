@@ -29,6 +29,11 @@
   --accent-hover: #c96442;
   --accent-foreground: #2a1710;
   --accent-text: #a84b2a;
+
+  --grid-line: rgb(0 0 0 / 0.045);
+  --grid-line-major: rgb(0 0 0 / 0.075);
+  --grid-glow: rgb(217 119 87 / 0.16);
+  --grid-glow-soft: rgb(217 119 87 / 0.07);
 }
 
 .dark {
@@ -45,6 +50,11 @@
   --accent-hover: #e08a6b;
   --accent-foreground: #2a1710;
   --accent-text: #e08a6b;
+
+  --grid-line: rgb(255 255 255 / 0.035);
+  --grid-line-major: rgb(255 255 255 / 0.06);
+  --grid-glow: rgb(217 119 87 / 0.2);
+  --grid-glow-soft: rgb(217 119 87 / 0.09);
 }
 
 @theme inline {
@@ -99,8 +109,17 @@
   }
 }
 
-body {
+/*
+ * Taban rengi <html> üzerindedir, <body> saydamdır: Backdrop bileşeni
+ * body içinde z-index -10 ile durduğu için body'nin opak bir arka planı
+ * olsaydı sahnenin tamamını gizlerdi.
+ */
+html {
   background: var(--background);
+}
+
+body {
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
@@ -140,6 +159,35 @@ body {
 }
 
 /*
+ * Blueprint ızgarası. İki frekansta çizilir (32px ince + 128px kalın) ve
+ * kenarlarda sert kesilmemesi için radyal bir maskeyle soluklaştırılır.
+ */
+@utility blueprint-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-major) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size:
+    128px 128px,
+    128px 128px,
+    32px 32px,
+    32px 32px;
+  /* Işık sayfaya dağıldığı için maske de merkezlidir: ızgara ortada tam
+     yoğunlukta durup kenarlara doğru her yönde eşit söner. */
+  mask-image: radial-gradient(
+    ellipse 130% 120% at 50% 50%,
+    black 60%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 130% 120% at 50% 50%,
+    black 60%,
+    transparent 100%
+  );
+}
+
+/*
  * İstatistik kartları (AverageCards): her iki temada da koyu kalır ama
  * blueprint diline uyması için üzerine çok soluk bir ızgara işlenir.
  */
@@ -149,8 +197,12 @@ body {
   background-color: var(--surface-strong);
   background-image:
     linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    radial-gradient(ellipse 80% 70% at 100% 0%, var(--grid-glow), transparent);
+  background-size:
+    24px 24px,
+    24px 24px,
+    100% 100%;
   box-shadow: 0 8px 24px -16px rgb(0 0 0 / 0.5);
 
   &:hover {
@@ -238,6 +290,24 @@ body {
 }
 
 /* Köşelerden gelen yumuşak accent ışığı; ızgaraya derinlik katar. */
+@utility blueprint-glow {
+  /*
+   * Işık tek bir kenardan değil, sayfaya dağılmış dört yumuşak lekeden
+   * gelir. Yerleşim ve yarıçaplar bilinçli olarak asimetriktir: eşit
+   * aralıklı olsalardı desen tekrar eden bir ızgara gibi okunur ve
+   * arkadaki teknik ızgarayla yarışırdı.
+   */
+  background-image:
+    radial-gradient(ellipse 45% 38% at 12% 8%, var(--grid-glow), transparent 62%),
+    radial-gradient(ellipse 38% 32% at 88% 30%, var(--grid-glow), transparent 62%),
+    radial-gradient(
+      ellipse 52% 40% at 30% 78%,
+      var(--grid-glow-soft),
+      transparent 64%
+    ),
+    radial-gradient(ellipse 40% 34% at 75% 96%, var(--grid-glow), transparent 62%);
+}
+
 /* Erişilebilirlik: hareket azaltma tercihi olan kullanıcılarda animasyonları kapat */
 @media (prefers-reduced-motion: reduce) {
   *,
