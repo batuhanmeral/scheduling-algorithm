@@ -19,15 +19,15 @@ export default function ComparisonPanel({ results }: ComparisonPanelProps) {
     ALGORITHMS.find((a) => a.id === r.algorithm)?.label ?? r.algorithm;
 
   return (
-    <section className="animate-fade-in-up rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900">
-      <h2 className="mb-5 text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+    <section className="animate-fade-in-up card card-hover">
+      <h2 className="mb-5 font-display text-sm font-semibold uppercase tracking-wider text-muted">
         {t("comparisonTitle")}
       </h2>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-140 text-sm">
+        <table className="font-display w-full min-w-140 text-sm tabular-nums">
           <thead>
-            <tr className="border-b border-neutral-200 text-left text-xs uppercase tracking-wide text-neutral-500 dark:border-neutral-700 dark:text-neutral-400">
+            <tr className="font-display border-b border-surface-border text-left text-xs uppercase tracking-wide text-muted">
               <th className="px-3 py-2">{t("algorithm")}</th>
               <th className="px-3 py-2 text-center">{t("avgWaiting")}</th>
               <th className="px-3 py-2 text-center">{t("avgTurnaround")}</th>
@@ -41,13 +41,13 @@ export default function ComparisonPanel({ results }: ComparisonPanelProps) {
                 <tr
                   key={r.algorithm}
                   style={{ animationDelay: `${i * 0.06}s` }}
-                  className="animate-fade-in-up border-b border-neutral-100 transition-colors last:border-b-0 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/40"
+                  className="animate-fade-in-up border-b border-surface-border/60 transition-colors last:border-b-0 hover:bg-accent/5"
                 >
                   <td className="px-3 py-3 font-medium">
                     <span className="flex items-center gap-2">
                       {labelOf(r)}
                       {isBest && (
-                        <span className="rounded-full bg-neutral-900 px-2 py-0.5 text-[10px] font-semibold uppercase text-white dark:bg-white dark:text-neutral-900">
+                        <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase text-accent-text">
                           ★ {t("best")}
                         </span>
                       )}
@@ -55,7 +55,7 @@ export default function ComparisonPanel({ results }: ComparisonPanelProps) {
                   </td>
                   <td
                     className={`px-3 py-3 text-center tabular-nums ${
-                      isBest ? "font-bold text-neutral-900 dark:text-white" : ""
+                      isBest ? "font-bold text-accent-text" : ""
                     }`}
                   >
                     {r.avgWaitingTime.toFixed(2)}
@@ -64,16 +64,17 @@ export default function ComparisonPanel({ results }: ComparisonPanelProps) {
                     {r.avgTurnaroundTime.toFixed(2)}
                   </td>
                   <td className="w-40 px-3 py-3">
-                    {/* Ortalama beklemeyi orantılı gösteren monokrom çubuk */}
-                    <div className="h-2.5 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
+                    {/* Ortalama beklemeyi orantılı gösteren çubuk; en iyi
+                        satır accent rengiyle, diğerleri soluk kalır. */}
+                    <div className="h-2.5 w-full overflow-hidden rounded-full bg-surface-border">
                       <div
                         style={{
                           width: `${(r.avgWaitingTime / maxWaiting) * 100}%`,
                         }}
                         className={`h-full origin-[left] animate-grow-bar rounded-full ${
                           isBest
-                            ? "bg-neutral-900 dark:bg-white"
-                            : "bg-neutral-400 dark:bg-neutral-500"
+                            ? "bg-accent"
+                            : "bg-muted/45"
                         }`}
                       />
                     </div>

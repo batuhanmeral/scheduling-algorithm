@@ -23,14 +23,14 @@ function StatCard({
   return (
     <div
       style={{ animationDelay: `${delay}s` }}
-      className="animate-fade-in-up rounded-xl border border-neutral-800 bg-neutral-900 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800"
+      className="animate-fade-in-up stat-card p-4 transition-all duration-300 hover:-translate-y-0.5"
     >
-      <p className="text-xs font-medium uppercase tracking-wide text-neutral-400">
+      <p className="font-display text-xs font-medium uppercase tracking-wide text-neutral-400">
         {label}
       </p>
-      <p className="mt-1 text-2xl font-bold text-white">
+      <p className="font-display mt-1 text-2xl font-bold tabular-nums text-white">
         {value}
-        <span className="ml-1 text-sm font-normal text-neutral-500">
+        <span className="ml-1 text-sm font-normal text-neutral-400">
           {unit}
         </span>
       </p>
