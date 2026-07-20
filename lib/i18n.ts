@@ -9,6 +9,7 @@ export const translations = {
     appTitle: "Chronos - Zamanlama Algoritması Simülatörü",
     appSubtitle:
       "İşletim sistemlerindeki CPU zamanlama algoritmalarını görselleştirerek öğrenin.",
+    appBadge: "algoritma",
     controlPanel: "Kontrol Paneli",
     algorithm: "Algoritma",
     timeQuantum: "Time Quantum",
@@ -78,6 +79,7 @@ export const translations = {
     appTitle: "Chronos - Scheduling Algorithm Simulator",
     appSubtitle:
       "Learn operating system CPU scheduling algorithms through visualization.",
+    appBadge: "algorithms",
     controlPanel: "Control Panel",
     algorithm: "Algorithm",
     timeQuantum: "Time Quantum",

@@ -143,16 +143,20 @@ export default function Home() {
 
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">
-      <header className="mb-8 flex animate-fade-in-up items-start justify-between gap-4">
+      <header className="mb-8 flex animate-fade-in-up flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
             {t("appTitle")}
           </h1>
-          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="mt-1.5 flex flex-wrap items-center gap-2 text-sm text-muted">
+            <span className="font-display rounded-md border border-accent/30 bg-accent/10 px-2 py-0.5 text-xs font-semibold tabular-nums text-accent-text">
+              {ALGORITHMS.length} {t("appBadge")}
+            </span>
             {t("appSubtitle")}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        {/* Üç ayrı kutu yerine tek bir cam araç çubuğu */}
+        <div className="toolbar flex items-center gap-1 rounded-xl border border-surface-border bg-surface p-1 backdrop-blur-xl">
           <ShareButton
             algorithm={algorithm}
             timeQuantum={timeQuantum}
@@ -190,7 +194,7 @@ export default function Home() {
       {error && (
         <div
           role="alert"
-          className="mt-6 animate-fade-in-up rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-300"
+          className="mt-6 animate-fade-in-up rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm font-medium text-rose-700 backdrop-blur-xl dark:text-rose-300"
         >
           ⚠️ {t(error.key)}
           {error.processId !== undefined && ` P${error.processId}`}
