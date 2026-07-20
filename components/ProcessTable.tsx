@@ -39,11 +39,9 @@ function TrashIcon() {
   );
 }
 
-const cellInputClass =
-  "w-full rounded-md border border-neutral-300 bg-white px-2 py-1.5 text-center text-sm outline-none transition-all duration-200 focus:border-neutral-500 focus:ring-2 focus:ring-neutral-400/30 dark:border-neutral-700 dark:bg-neutral-800 dark:focus:border-neutral-400";
+const cellInputClass = "field w-full px-2 py-1.5 text-center text-sm tabular-nums";
 
-const headerButtonClass =
-  "rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-neutral-100 hover:shadow active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700";
+const headerButtonClass = "btn-base btn-ghost px-3 py-1.5 text-xs";
 
 export default function ProcessTable({
   processes,
@@ -57,9 +55,9 @@ export default function ProcessTable({
   const { t } = useLanguage();
 
   return (
-    <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+    <section className="card card-hover">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-muted">
           {t("processTable")}
         </h2>
         <div className="flex flex-wrap items-center gap-2">
@@ -82,9 +80,9 @@ export default function ProcessTable({
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-105 border-separate border-spacing-y-2 text-sm">
+        <table className="font-display w-full min-w-105 border-separate border-spacing-y-2 text-sm">
           <thead>
-            <tr className="text-left text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+            <tr className="font-display text-left text-xs uppercase tracking-wide text-muted">
               <th className="px-2 py-1">{t("processId")}</th>
               <th className="px-2 py-1 text-center">{t("arrivalTime")}</th>
               <th className="px-2 py-1 text-center">{t("burstTime")}</th>
@@ -98,7 +96,7 @@ export default function ProcessTable({
             {processes.map((p) => (
               <tr
                 key={p.id}
-                className="animate-fade-in-up transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/40"
+                className="animate-fade-in-up transition-colors hover:bg-accent/5"
               >
                 <td className="rounded-l-lg px-2 py-1">
                   <span className="inline-flex items-center gap-2 font-medium">
@@ -159,7 +157,7 @@ export default function ProcessTable({
               <tr>
                 <td
                   colSpan={showPriority ? 5 : 4}
-                  className="px-2 py-6 text-center text-neutral-400"
+                  className="px-2 py-6 text-center text-muted"
                 >
                   {t("emptyTable")}
                 </td>
@@ -172,7 +170,7 @@ export default function ProcessTable({
       <button
         type="button"
         onClick={onAdd}
-        className="mt-3 w-full rounded-lg border-2 border-dashed border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-500 transition-all duration-200 hover:border-neutral-500 hover:bg-neutral-50 hover:text-neutral-800 active:scale-[0.99] dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-500 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-200"
+        className="font-display mt-3 w-full rounded-lg border-2 border-dashed border-surface-border px-4 py-2 text-sm font-medium text-muted transition-all duration-200 hover:border-accent hover:bg-accent/5 hover:text-accent-text active:scale-[0.99]"
       >
         + {t("addProcess")}
       </button>

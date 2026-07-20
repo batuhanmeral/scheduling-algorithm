@@ -17,8 +17,7 @@ interface ControlPanelProps {
   canCalculate: boolean;
 }
 
-const fieldClass =
-  "rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm outline-none transition-all duration-200 focus:border-neutral-500 focus:ring-2 focus:ring-neutral-400/30 dark:border-neutral-700 dark:bg-neutral-800 dark:focus:border-neutral-400";
+const fieldClass = "field px-3 py-2 text-sm";
 
 export default function ControlPanel({
   algorithm,
@@ -32,8 +31,8 @@ export default function ControlPanel({
   const { t } = useLanguage();
 
   return (
-    <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900">
-      <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+    <section className="card card-hover">
+      <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wider text-muted">
         {t("controlPanel")}
       </h2>
 
@@ -77,7 +76,7 @@ export default function ControlPanel({
             type="button"
             onClick={onCalculate}
             disabled={!canCalculate}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-lg active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-sm dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
+            className="btn-base btn-primary px-4 py-2 text-sm"
           >
             ▶ {t("calculate")}
           </button>
@@ -85,7 +84,7 @@ export default function ControlPanel({
             type="button"
             onClick={onCompare}
             disabled={!canCalculate}
-            className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-neutral-100 hover:shadow active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700"
+            className="btn-base btn-ghost px-4 py-2 text-sm"
           >
             📊 {t("compare")}
           </button>
