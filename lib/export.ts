@@ -85,7 +85,10 @@ export function downloadGanttPng(result: SimulationResult, idleText: string) {
 
   ctx.textBaseline = "middle";
   ctx.textAlign = "center";
-  ctx.font = "600 13px system-ui, sans-serif";
+  // Sayfadaki mono tipografiyle uyumlu olsun diye monospace kullanılır.
+  // next/font ailesinin adı derleme zamanında hash'lendiği için canvas'tan
+  // erişilemez; bu yüzden jenerik ui-monospace'e güveniyoruz.
+  ctx.font = "600 13px ui-monospace, monospace";
 
   for (const seg of gantt) {
     const x = pad + (seg.start - start) * pxPerUnit;
@@ -108,7 +111,7 @@ export function downloadGanttPng(result: SimulationResult, idleText: string) {
 
   // Zaman ekseni etiketleri (her dilim sınırı + son).
   ctx.fillStyle = "#737373";
-  ctx.font = "500 11px system-ui, sans-serif";
+  ctx.font = "500 11px ui-monospace, monospace";
   const axisY = pad + barHeight + axisHeight / 2;
   for (const seg of gantt) {
     const x = pad + (seg.start - start) * pxPerUnit;
