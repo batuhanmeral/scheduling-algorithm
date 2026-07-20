@@ -40,7 +40,7 @@ export default function ShareButton(props: ShareButtonProps) {
       type="button"
       onClick={handleShare}
       aria-label={t("shareAria")}
-      className="rounded-lg border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 shadow-sm transition-all duration-200 hover:bg-neutral-100 hover:shadow active:scale-95 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700"
+      className="btn-base btn-ghost px-3 py-2 text-xs"
     >
       {copied ? `✓ ${t("copied")}` : `🔗 ${t("share")}`}
     </button>

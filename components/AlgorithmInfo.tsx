@@ -16,13 +16,14 @@ export default function AlgorithmInfo({ algorithm }: AlgorithmInfoProps) {
   return (
     <section
       key={algorithm}
-      className="animate-fade-in-up rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+      className="animate-fade-in-up card card-hover"
     >
-      <h2 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+      <h2 className="mb-2 flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-wider text-muted">
         <span aria-hidden>💡</span>
         {t("howItWorks")}
       </h2>
-      <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+      {/* Tek uzun paragraf olduğu için bilinçli olarak Inter'de kalır. */}
+      <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
         {t(descriptionKey)}
       </p>
     </section>

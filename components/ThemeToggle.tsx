@@ -36,7 +36,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={t("themeToggleAria")}
-      className="group rounded-lg border border-neutral-300 bg-white p-2 text-lg leading-none shadow-sm transition-all duration-200 hover:bg-neutral-100 hover:shadow active:scale-90 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+      className="btn-base btn-ghost group p-2 text-lg leading-none"
     >
       <span className="inline-block transition-transform duration-300 group-hover:rotate-12">
         {theme === "dark" ? "☀️" : "🌙"}
