@@ -20,13 +20,13 @@ export default function ResultsTable({
 
   return (
     <div>
-      <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+      <h3 className="mb-3 font-display text-sm font-semibold uppercase tracking-wider text-muted">
         {t("resultsTable")}
       </h3>
       <div className="overflow-x-auto">
-        <table className="w-full min-w-140 text-sm">
+        <table className="font-display w-full min-w-140 text-sm tabular-nums">
           <thead>
-            <tr className="border-b border-neutral-200 text-left text-xs uppercase tracking-wide text-neutral-500 dark:border-neutral-700 dark:text-neutral-400">
+            <tr className="font-display border-b border-surface-border text-left text-xs uppercase tracking-wide text-muted">
               <th className="px-3 py-2">Process</th>
               <th className="px-3 py-2 text-center">{t("arrivalTime")}</th>
               <th className="px-3 py-2 text-center">{t("burstTime")}</th>
@@ -43,7 +43,7 @@ export default function ResultsTable({
               <tr
                 key={r.id}
                 style={{ animationDelay: `${i * 0.06}s` }}
-                className="animate-fade-in-up border-b border-neutral-100 transition-colors last:border-b-0 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/40"
+                className="animate-fade-in-up border-b border-surface-border/60 transition-colors last:border-b-0 hover:bg-accent/5"
               >
                 <td className="px-3 py-2">
                   <span className="inline-flex items-center gap-2 font-medium">
@@ -71,10 +71,10 @@ export default function ResultsTable({
             ))}
           </tbody>
           <tfoot>
-            <tr className="border-t-2 border-neutral-200 dark:border-neutral-700">
+            <tr className="border-t-2 border-surface-border">
               <td
                 colSpan={showPriority ? 5 : 4}
-                className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400"
+                className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wide text-muted"
               >
                 {t("total")}
               </td>

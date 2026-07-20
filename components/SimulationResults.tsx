@@ -35,14 +35,14 @@ export default function SimulationResults({ result }: SimulationResultsProps) {
   const cpuUtilization = (busyTime / totalTime) * 100;
 
   return (
-    <section className="animate-fade-in-up rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+    <section className="animate-fade-in-up card card-hover">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-muted">
           {t("simulationResults")}
         </h2>
         <div className="flex flex-wrap items-center gap-2">
           <ExportButtons result={result} />
-          <span className="animate-pop-in rounded-full bg-neutral-900 px-3 py-1 text-xs font-medium text-white dark:bg-neutral-100 dark:text-neutral-900">
+          <span className="font-display animate-pop-in rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent-text">
             {algorithmLabel}
           </span>
         </div>

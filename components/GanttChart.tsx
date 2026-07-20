@@ -21,13 +21,13 @@ export default function GanttChart({ segments }: GanttChartProps) {
 
   return (
     <div>
-      <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+      <h3 className="mb-3 font-display text-sm font-semibold uppercase tracking-wider text-muted">
         {t("ganttChart")}
       </h3>
       <div className="overflow-x-auto pb-1">
         <div className="min-w-120">
           {/* Renkli işlem blokları */}
-          <div className="relative flex h-14 overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700">
+          <div className="relative flex h-14 overflow-hidden rounded-lg border border-surface-border">
             {segments.map((seg, i) => {
               const widthPct =
                 ((seg.end - seg.start) / totalDuration) * 100;
@@ -39,9 +39,9 @@ export default function GanttChart({ segments }: GanttChartProps) {
                     width: `${widthPct}%`,
                     animationDelay: `${i * STAGGER_DELAY}s`,
                   }}
-                  className={`flex animate-grow-bar origin-[left] items-center justify-center border-r border-white/40 text-xs font-semibold last:border-r-0 dark:border-black/20 ${
+                  className={`font-display flex animate-grow-bar origin-[left] items-center justify-center border-r border-white/40 text-xs font-semibold last:border-r-0 dark:border-black/20 ${
                     isIdle
-                      ? "bg-neutral-200 bg-[repeating-linear-gradient(45deg,transparent,transparent_6px,rgba(0,0,0,0.06)_6px,rgba(0,0,0,0.06)_12px)] text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400"
+                      ? "bg-[repeating-linear-gradient(45deg,transparent,transparent_6px,var(--grid-line-major)_6px,var(--grid-line-major)_12px)] text-muted"
                       : `${processColor(seg.processId!)} text-white`
                   }`}
                   title={
@@ -57,7 +57,7 @@ export default function GanttChart({ segments }: GanttChartProps) {
           </div>
 
           {/* Zaman etiketleri */}
-          <div className="relative mt-1 h-5 text-[11px] font-medium text-neutral-500 dark:text-neutral-400">
+          <div className="font-display relative mt-1 h-5 text-[11px] font-medium tabular-nums text-muted">
             {segments.map((seg, i) => (
               <span
                 key={i}
