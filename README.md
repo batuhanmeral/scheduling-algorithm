@@ -57,31 +57,17 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser. Run the unit tests with `npm test`.
 
-## Project Structure
-
-```
-app/          Next.js App Router entry (layout, page, global styles)
-components/   React UI components (control panel, tables, charts, toggles)
-lib/          Scheduling algorithms, timeline, export, share, and i18n logic
-  algorithms/   One module per scheduler + shared helpers and tests
-docs/         Screenshots and other documentation assets
-```
-
 ## Screenshots
 
 <table>
   <tr>
     <td align="center">
       <img src="docs/image_1.png" alt="Chronos — control panel, algorithm explanation and editable process table" width="900" />
-      <br />
-      <sub>Control panel, algorithm explanation, editable process table and the Gantt chart</sub>
     </td>
   </tr>
   <tr>
     <td align="center">
       <img src="docs/image_2.png" alt="Chronos — results table, aggregate metrics and algorithm comparison" width="900" />
-      <br />
-      <sub>Per-process results, aggregate metrics and the side-by-side algorithm comparison</sub>
     </td>
   </tr>
 </table>
