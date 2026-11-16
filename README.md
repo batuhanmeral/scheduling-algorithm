@@ -39,14 +39,14 @@ Each process is defined by an **arrival time (AT)**, a **burst time (BT)**, and 
 
 ## Tech Stack
 
-- [Next.js 16](https://nextjs.org) (App Router) with React 19
+- [Next.js 16.4](https://nextjs.org) (App Router) with React 19
 - [Tailwind CSS 4](https://tailwindcss.com)
 - TypeScript
 - [Vitest](https://vitest.dev) for unit tests
 
 ## Installation
 
-Requires [Node.js](https://nodejs.org) 20 or newer.
+Use [Node.js](https://nodejs.org) 22.12 or later. CI runs on Node.js 22.
 
 Install dependencies and start the development server:
 
