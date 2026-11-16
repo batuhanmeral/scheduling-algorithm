@@ -55,7 +55,30 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser. Run the unit tests with `npm test`.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Development
+
+| Command | What it does |
+| --- | --- |
+| `npm test` | Run all unit tests once (Vitest, CI-friendly) |
+| `npm test -- <file>` | Run a single test file |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run test:coverage` | Run tests with coverage and enforce thresholds |
+| `npm run lint` | Lint with ESLint (`eslint-config-next`) |
+| `npm run typecheck` | Type-check with `tsc --noEmit` |
+| `npm run check` | Run lint, typecheck and tests with coverage |
+
+More detailed developer documentation lives in `.docs/` (written in Turkish).
+
+## CI and security
+
+GitHub Actions runs on every pull request:
+
+- **CI** (`.github/workflows/ci.yml`): `test` runs lint, typecheck, unit tests and a production build (also on pushes to `master`); `dependency-review` blocks pull requests that add dependencies with high or critical advisories.
+- **Security** (`.github/workflows/security.yml`): `scan` runs gitleaks over the full history, Semgrep (TypeScript, React, Next.js, GitHub Actions rules) and zizmor. It also runs monthly and on demand.
+
+Actions are pinned to commit SHAs and scanner images to digests. Details are in `.docs/` (Turkish).
 
 ## Screenshots
 
