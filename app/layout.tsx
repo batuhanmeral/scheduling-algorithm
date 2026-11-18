@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Backdrop from "@/components/Backdrop";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { appName } from "@/lib/i18n";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chronos - Scheduling Algorithm Simulator",
+  title: appName,
   description:
     "İşletim sistemleri CPU zamanlama (scheduling) algoritmalarını interaktif olarak görselleştiren eğitim aracı: FCFS, SJF, SRTF, Round Robin ve Priority.",
 };

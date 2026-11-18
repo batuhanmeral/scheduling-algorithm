@@ -1,8 +1,8 @@
 # AGENTS.md
 
-Chronos: Next.js 16 + React 19 ile yazılmış CPU zamanlama algoritması
-simülatörü. Zamanlama mantığı saf TypeScript olarak `lib/algorithms/`
-altındadır; UI `app/` ve `components/` altındadır.
+Scheduling Algorithm Simulator, Next.js 16 + React 19 ile yazılmış bir CPU
+zamanlama algoritması simülatörüdür. Zamanlama mantığı saf TypeScript olarak
+`lib/algorithms/` altındadır. Arayüz `app/` ve `components/` altındadır.
 
 ## Commands
 

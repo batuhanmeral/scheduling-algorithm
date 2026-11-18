@@ -1,39 +1,39 @@
-# Chronos
+# Scheduling Algorithm Simulator
 
-> Interactive CPU scheduling algorithm simulator with Gantt charts and side-by-side comparison.
+> Interactive CPU scheduling algorithm simulator with Gantt charts and algorithm comparison.
 
-Chronos is an interactive, bilingual (TR/EN) educational tool for visualizing operating-system CPU scheduling algorithms. Enter processes, run a scheduler, and watch the Gantt chart, per-process metrics, and averages update instantly — or compare all ten algorithms side by side to see which one performs best.
+Scheduling Algorithm Simulator is an interactive educational tool for visualizing CPU scheduling in operating systems. It supports Turkish and English. Enter processes and run a scheduler to see the Gantt chart, metrics for each process, and averages. Compare all ten algorithms side by side to see which one performs best.
 
-**[View the live application here.](https://chronos-batuhanmeral.vercel.app)**
+**[View the live application here.](https://scheduling-algorithm-batuhanmeral.vercel.app)**
 
 
 ## Features
 
-- **Ten scheduling algorithms** — FCFS, SJF, SRTF, Round Robin, Priority (non-preemptive and preemptive), Priority + Aging, Priority Round Robin, HRRN, and MLFQ.
-- **Editable process table** — Add, delete, and edit processes, generate a random set, or clear all at once.
-- **Gantt chart** — Color-coded, animated timeline of CPU execution with idle periods clearly marked.
-- **Results table** — Completion, turnaround, and waiting time per process, plus a totals row.
-- **Aggregate metrics** — Average turnaround time, average waiting time, throughput, and CPU utilization.
-- **Algorithm comparison** — Run all algorithms on the same input and highlight the best by average waiting time.
-- **Export** — Download results as CSV or the Gantt chart as PNG.
-- **Shareable links** — The current algorithm and process set are encoded into the URL; opening a shared link restores the inputs and runs the simulation automatically.
-- **Theme & language** — Light/dark mode and Turkish/English toggles, both persisted in `localStorage`.
-- **Algorithm explanations** — A "How It Works" card summarizes the selected algorithm in plain language.
+- **Ten scheduling algorithms**. FCFS, SJF, SRTF, Round Robin, Priority (with and without preemption), Priority + Aging, Priority Round Robin, HRRN, and MLFQ.
+- **Editable process table**. Add, delete, and edit processes, generate a random set, or clear all at once.
+- **Gantt chart**. An animated timeline uses color to show CPU execution and idle periods.
+- **Results table**. Completion, turnaround, and waiting time per process, plus a totals row.
+- **Aggregate metrics**. Average turnaround time, average waiting time, throughput, and CPU utilization.
+- **Algorithm comparison**. Run all algorithms on the same input and highlight the best by average waiting time.
+- **Export**. Download results as CSV or the Gantt chart as PNG.
+- **Shareable links**. The current algorithm and process set are encoded into the URL; opening a shared link restores the inputs and runs the simulation automatically.
+- **Theme & language**. Light/dark mode and Turkish/English toggles, both persisted in `localStorage`.
+- **Algorithm explanations**. A "How It Works" card summarizes the selected algorithm in plain language.
 
 ## Algorithms
 
 | Algorithm | Preemptive | Notes |
 | --- | --- | --- |
-| **FCFS** — First Come First Serve | No | Runs processes in arrival order. |
-| **SJF** — Shortest Job First | No | Picks the shortest available burst time next. |
-| **SRTF** — Shortest Remaining Time First | Yes | Preemptive variant of SJF; re-evaluates on every arrival. |
-| **RR** — Round Robin | Yes | Cycles through processes using a configurable time quantum. |
-| **Priority** | No | Runs the highest-priority available process (lower value = higher priority). |
-| **Priority (Preemptive)** | Yes | A higher-priority arrival takes over the CPU immediately. |
+| **FCFS** (First Come First Serve) | No | Runs processes in arrival order. |
+| **SJF** (Shortest Job First) | No | Picks the shortest available burst time next. |
+| **SRTF** (Shortest Remaining Time First) | Yes | Preemptive variant of SJF; reevaluates on every arrival. |
+| **RR** (Round Robin) | Yes | Cycles through processes using a configurable time quantum. |
+| **Priority** | No | Runs the available process with the highest priority (lower value = higher priority). |
+| **Priority (Preemptive)** | Yes | A process arriving with higher priority takes over the CPU immediately. |
 | **Priority + Aging** | Yes | Waiting processes gain one effective priority level every 5 time units, preventing starvation. |
-| **Priority Round Robin** | Yes | One queue per priority level; the highest-priority queue is served with Round Robin. |
-| **HRRN** — Highest Response Ratio Next | No | Picks the highest `(waiting + burst) / burst` ratio; solves SJF's starvation problem. |
-| **MLFQ** — Multi-Level Feedback Queue | Yes | Three queues: RR with quantum, RR with 2×quantum, then FCFS; jobs that exhaust their quantum are demoted. |
+| **Priority Round Robin** | Yes | One queue per priority level; the queue with the highest priority is served with Round Robin. |
+| **HRRN** (Highest Response Ratio Next) | No | Picks the highest `(waiting + burst) / burst` ratio; solves SJF's starvation problem. |
+| **MLFQ** (Multilevel Feedback Queue) | Yes | Three queues: RR with quantum, RR with 2×quantum, then FCFS; jobs that exhaust their quantum are demoted. |
 
 Each process is defined by an **arrival time (AT)**, a **burst time (BT)**, and a **priority** (used by the Priority family of algorithms). The time quantum applies to Round Robin, Priority Round Robin, and MLFQ.
 
@@ -61,12 +61,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 | Command | What it does |
 | --- | --- |
-| `npm test` | Run all unit tests once (Vitest, CI-friendly) |
+| `npm test` | Run all unit tests once (Vitest, suited to CI) |
 | `npm test -- <file>` | Run a single test file |
 | `npm run test:watch` | Run tests in watch mode |
 | `npm run test:coverage` | Run tests with coverage and enforce thresholds |
 | `npm run lint` | Lint with ESLint (`eslint-config-next`) |
-| `npm run typecheck` | Type-check with `tsc --noEmit` |
+| `npm run typecheck` | Check types with `tsc --noEmit` |
 | `npm run check` | Run lint, typecheck and tests with coverage |
 
 More detailed developer documentation lives in `.docs/` (written in Turkish).
@@ -85,12 +85,12 @@ Actions are pinned to commit SHAs and scanner images to digests. Details are in 
 <table>
   <tr>
     <td align="center">
-      <img src="docs/image_1.png" alt="Chronos — control panel, algorithm explanation and editable process table" width="900" />
+      <img src="docs/image_1.png" alt="Scheduling Algorithm Simulator, control panel, algorithm explanation and editable process table" width="900" />
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="docs/image_2.png" alt="Chronos — results table, aggregate metrics and algorithm comparison" width="900" />
+      <img src="docs/image_2.png" alt="Scheduling Algorithm Simulator, results table, aggregate metrics and algorithm comparison" width="900" />
     </td>
   </tr>
 </table>

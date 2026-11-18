@@ -1,12 +1,14 @@
 export type Lang = "tr" | "en";
 
+export const appName = "Scheduling Algorithm Simulator";
+
 /**
  * Tüm arayüz metinleri. Yeni bir metin eklerken her iki dile de
  * eklenmelidir; TranslationKey tipi bunu derleme zamanında zorlar.
  */
 export const translations = {
   tr: {
-    appTitle: "Chronos - Zamanlama Algoritması Simülatörü",
+    appTitle: appName,
     appSubtitle:
       "İşletim sistemlerindeki CPU zamanlama algoritmalarını görselleştirerek öğrenin.",
     appBadge: "algoritma",
@@ -76,7 +78,7 @@ export const translations = {
     exportPng: "PNG",
   },
   en: {
-    appTitle: "Chronos - Scheduling Algorithm Simulator",
+    appTitle: appName,
     appSubtitle:
       "Learn operating system CPU scheduling algorithms through visualization.",
     appBadge: "algorithms",
