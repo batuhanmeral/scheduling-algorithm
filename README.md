@@ -69,8 +69,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `npm run typecheck` | Check types with `tsc --noEmit` |
 | `npm run check` | Run lint, typecheck and tests with coverage |
 
-More detailed developer documentation lives in `.docs/` (written in Turkish).
-
 ## CI and security
 
 GitHub Actions runs on every pull request:
@@ -78,7 +76,7 @@ GitHub Actions runs on every pull request:
 - **CI** (`.github/workflows/ci.yml`): `test` runs lint, typecheck, unit tests and a production build (also on pushes to `master`); `dependency-review` blocks pull requests that add dependencies with high or critical advisories.
 - **Security** (`.github/workflows/security.yml`): `scan` runs gitleaks over the full history, Semgrep (TypeScript, React, Next.js, GitHub Actions rules) and zizmor. It also runs monthly and on demand.
 
-Actions are pinned to commit SHAs and scanner images to digests. Details are in `.docs/` (Turkish).
+Actions are pinned to commit SHAs and scanner images to digests.
 
 ## Screenshots
 
