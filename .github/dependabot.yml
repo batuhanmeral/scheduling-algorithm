@@ -29,6 +29,6 @@ updates:
       npm-minor-patch:
         update-types: [minor, patch]
     ignore:
-      # @types/node follows the runtime Node.js major (.nvmrc); bump it by hand.
-      - dependency-name: "@types/node"
+      # Majors need code changes; take them by hand. Security updates still open PRs.
+      - dependency-name: "*"
         update-types: [version-update:semver-major]
