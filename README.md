@@ -46,7 +46,7 @@ Each process is defined by an **arrival time (AT)**, a **burst time (BT)**, and 
 
 ## Installation
 
-Use [Node.js](https://nodejs.org) 22.12 or later. CI runs on Node.js 22.
+Use [Node.js](https://nodejs.org) 24 (see `.nvmrc`); CI runs on the same version.
 
 Install dependencies and start the development server:
 
@@ -71,12 +71,14 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## CI and security
 
-GitHub Actions runs on every pull request:
+GitHub Actions runs on every pull request and on pushes to `master`:
 
-- **CI** (`.github/workflows/ci.yml`): `test` runs lint, typecheck, unit tests and a production build (also on pushes to `master`); `dependency-review` blocks pull requests that add dependencies with high or critical advisories.
-- **Security** (`.github/workflows/security.yml`): `scan` runs gitleaks over the full history, Semgrep (TypeScript, React, Next.js, GitHub Actions rules) and zizmor. It also runs monthly and on demand.
+- **CI** (`.github/workflows/ci.yml`): `test` runs lint, typecheck, unit tests with coverage thresholds and a production build; `dependency-review` blocks pull requests that add dependencies with high or critical advisories.
+- **Security** (`.github/workflows/security.yml`): `scan` runs gitleaks over the full history, Semgrep (TypeScript, React, Next.js, GitHub Actions rules), zizmor and a Trivy scan of `package-lock.json`. It also runs weekly and on demand.
 
-Actions are pinned to commit SHAs and scanner images to digests.
+Actions are pinned to commit SHAs and scanner images to digests. Dependabot opens weekly grouped updates for npm packages and actions. The app sends a Content Security Policy and other security headers, defined in `next.config.ts` and covered by `next.config.test.ts`.
+
+To report a vulnerability, see [SECURITY.md](SECURITY.md).
 
 ## Screenshots
 
